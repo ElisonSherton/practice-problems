@@ -1,4 +1,8 @@
-import random
+# https://leetcode.com/problems/group-anagrams/description/
+# There is a more optimal solution to this -> Simply use a hashmap as number of characters is limited from a - z
+# Key -> xxxxxx...26 times where each x represents count of abcdef....
+# Values are a list of the strings themselves
+# Link to optimal solution: https://www.youtube.com/watch?v=vzdNOK2oB2E
 from typing import List
 
 class Solution:
@@ -31,6 +35,7 @@ class Solution:
 
         # Group all indices by their length
         # This will reduce the number of comparisons to be done in subsequent step
+        # O(m . n) -> m = len(strs), n = avg string length
         index_groups = {}
         for idx, s in enumerate(strs):
             k = len(s)
@@ -38,6 +43,7 @@ class Solution:
             else: index_groups[k] = {idx}
 
         # Check for anagrams within groups of same length
+        # O(m**2 * n) time complexity 
         groups = []
         for all_indices in index_groups.values():
             while len(all_indices) > 0:
