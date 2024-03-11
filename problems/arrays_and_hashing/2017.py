@@ -1,6 +1,35 @@
 # https://leetcode.com/problems/grid-game/description/
 from typing import List
 
+# Further optimizing the space complexity
+class Solution:
+
+    def gridGame(self, grid: List[List[int]]) -> int:
+        
+        # Keep the top sum precomputed
+        top_sum = sum(grid[0])
+        n = len(grid[0])
+
+        top_running_sum = 0
+        bottom_running_sum = 0
+        result = float("inf")
+
+        # Iterate over the entire row from left to right
+        for i in range(n):
+            # Keep track of top running sum
+            top_running_sum += grid[0][i]
+            
+            # Compute the blue reward at current position 
+            blue_reward = max(top_sum - top_running_sum, bottom_running_sum)
+            
+            # Keep track of bottom running sum but with a lag of one timestep
+            bottom_running_sum += grid[1][i]
+
+            # If the current reward is smaller than any of the rewards computed till now, then set that as the result
+            result = min(blue_reward, result)
+        
+        return result
+
 # Smart Solution
 class Solution:
 
