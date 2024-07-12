@@ -1,16 +1,16 @@
 # https://leetcode.com/problems/decode-string/description/
+from typing import List
 
 class Solution:
     def decodeString(self, s: str) -> str:
 
         # Create a set of lowercase characters to later help to check if the element to be added is a digit or not
         lower = set("abcdefghijklmnopqrstuvwxyz")
-        decoded_stack = []
+        decoded_stack: List = []
 
         for element in s:
             # If element is a digit, then do this
             if (element != "[") and (element not in lower) and (element != "]"):
-                
 
                 # Check if it is a multiple digit number by checking previously stacked numbers
                 num = element
